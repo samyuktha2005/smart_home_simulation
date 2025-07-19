@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .results {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Analysis Results</h1>
+    </header>
+
+    <div class="results">
+        <h2>Generated Graphs</h2>
+        <img src="{{ url_for('static', filename='client_latency_per_endpoint.png') }}" alt="Client Latency per Endpoint">
+        <img src="{{ url_for('static', filename='client_latency_distribution.png') }}" alt="Client Latency Distribution">
+        <img src="{{ url_for('static', filename='server_latency_per_endpoint.png') }}" alt="Server Latency per Endpoint">
+        <img src="{{ url_for('static', filename='server_latency_distribution.png') }}" alt="Server Latency Distribution">
+        <img src="{{ url_for('static', filename='client_throughput.png') }}" alt="Client Throughput">
+        <img src="{{ url_for('static', filename='server_throughput.png') }}" alt="Server Throughput">
+        <a href="/">Back to Home</a>
+    </div>
+
+</body>
+</html>
+

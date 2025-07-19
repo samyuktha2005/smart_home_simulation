@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Automation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: #6c63ff;
+        }
+
+        .btn-primary {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #5145c1;
+        }
+
+        /* Main Content */
+        .hero-section {
+            background-color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            flex: 1 1 calc(33% - 20px);
+        }
+
+        .feature-item img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 22px;
+            color: #333;
+        }
+
+        .feature-item p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .control-form {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .control-form select, .control-form button {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .control-form button {
+            background-color: #6c63ff;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Response Container */
+        .response-container {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with navigation -->
+    <header>
+        <h1>Smart Home</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#how-it-works">How it Works</a>
+            <a href="/analysis">Analysis</a>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <h2>Dive Into The World of Smart Home Automation</h2>
+        <p>Discover the perfect synergy of innovation and comfort. Make your home more efficient and personalized with cutting-edge technology tailored to your needs.</p>
+    </section>
+
+    <!-- Feature Grid -->
+    <section class="features">
+        <div class="feature-grid">
+            <!-- Smart Lighting Feature -->
+            <div class="feature-item" onclick="showControl('light-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942190.png" alt="Light Control">
+                <h3>Smart Lighting</h3>
+                <p>Control your home lighting with a single tap, adjust brightness, and create personalized lighting schedules.</p>
+                <!-- Light Control Form (Initially Hidden) -->
+                <div id="light-control" class="control-form">
+                    <h4>Control Lighting</h4>
+                    <label for="light-command">Lighting Command:</label>
+                    <select id="light-command" name="light-command">
+                        <option value="on">ON</option>
+                        <option value="off">OFF</option>
+                    </select>
+                    <button onclick="sendCommand('light')">Send Command</button>
+                    <div id="light-response" class="response-container"></div>
+                </div>
+            </div>
+
+            <!-- Thermostat Control Feature -->
+            <div class="feature-item" onclick="showControl('thermostat-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1425/1425634.png" alt="Thermostat Control">
+                <h3>Thermostat Control</h3>
+                <p>Maintain the perfect temperature in your home with automated temperature adjustments based on your preferences.</p>
+                <!-- Thermostat Control Form (Initially Hidden) -->
+                <div id="thermostat-control" class="control-form">
+                    <h4>Control Thermostat</h4>
+                    <input type="text" id="thermostat-temperature" placeholder="Set temperature (e.g., 22°C)" />
+                    <button onclick="sendCommand('thermostat')">Send Command</button>
+                    <div id="thermostat-response" class="response-container"></div>
+                </div>
+            </div>
+
+            <!-- Home Security Feature -->
+            <div class="feature-item" onclick="showControl('security-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1086/1086721.png" alt="Security System">
+                <h3>Home Security</h3>
+                <p>Monitor your home with advanced security features, including real-time alerts and live video feeds.</p>
+                <!-- Security Control Form (Initially Hidden) -->
+                <div id="security-control" class="control-form">
+                    <h4>Control Security</h4>
+                    <button onclick="sendCommand('camera')">Send Command</button>
+                    <div id="security-response" class="response-container"></div>
+                </div>
+            </div>
+            
+            <!-- Cooking Control Feature -->
+            <div class="feature-item" onclick="showControl('cooking-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/876/876011.png" alt="Cooking Control">
+                <h3>Cooking Assistant</h3>
+                <p>Get cooking recommendations, set timers, and manage your kitchen efficiently.</p>
+                <div id="cooking-control" class="control-form">
+                    <h4>Cooking Assistant</h4>
+                    <input type="text" id="cooking-command" placeholder="Enter command (e.g., start/stop)" />
+                    <button onclick="sendCommand('cooking')">Send Command</button>
+                    <div id="cooking-response" class="response-container"></div>
+                </div>
+            </div>
+
+            <!-- Smart Lock Control Feature -->
+            <div class="feature-item" onclick="showControl('smartlock-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1615/1615961.png" alt="Smart Lock Control">
+                <h3>Smart Lock</h3>
+                <p>Manage your door locks remotely and ensure the security of your home.</p>
+                <div id="smartlock-control" class="control-form">
+                    <h4>Control Smart Lock</h4>
+                    <select id="smartlock-command" name="smartlock-command">
+                        <option value="lock">Lock</option>
+                        <option value="unlock">Unlock</option>
+                    </select>
+                    <button onclick="sendCommand('smartlock')">Send Command</button>
+                    <div id="smartlock-response" class="response-container"></div>
+                </div>
+            </div>
+
+            <!-- Voice Assistant Feature -->
+            <div class="feature-item" onclick="showControl('voice-assistant-control')">
+                <img src="https://cdn-icons-png.flaticon.com/512/4070/4070891.png" alt="Voice Assistant">
+                <h3>Voice Assistant</h3>
+                <p>Interact with your home through voice commands and queries.</p>
+                <div id="voice-assistant-control" class="control-form">
+                    <h4>Voice Assistant</h4>
+                    <input type="text" id="voice-command" placeholder="Say something..." />
+                    <button onclick="sendCommand('voice_assistant')">Send Command</button>
+                    <div id="voice_assistant-response" class="response-container"></div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+<center>
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <h2>About Smart Home</h2>
+        <p>Smart Home is a cutting-edge home automation system that combines ease of use with innovative features. Our mission is to make your living space more comfortable, secure, and efficient by using the latest in smart home technology.</p>
+    </section>
+
+    <!-- How it Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <h2>How It Works</h2>
+        <p>Our smart home system integrates seamlessly with various devices, allowing you to control lighting, temperature, and security features from a single platform.</p>
+    </section>
+    </center>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Smart Home. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function showControl(controlId) {
+            const controlElement = document.getElementById(controlId);
+            controlElement.style.display = 'block';
+        }
+
+        function sendCommand(controlType) {
+            let url = '';
+            let formData = new FormData();
+            let responseContainerId = '';
+            
+            if (controlType === 'light') {
+                url = '/light';
+                formData.append('command', document.getElementById('light-command').value);
+                responseContainerId = 'light-response';
+            } else if (controlType === 'thermostat') {
+                url = '/thermostat';
+                formData.append('temperature', document.getElementById('thermostat-temperature').value);
+                responseContainerId = 'thermostat-response';
+            } else if (controlType === 'camera') {
+                url = '/camera';
+                responseContainerId = 'security-response';
+            }else if (controlType === 'cooking') {
+                url = '/cooking';
+                formData.append('command', document.getElementById('cooking-command').value);
+                responseContainerId = 'cooking-response';
+            }else if (controlType === 'voice_assistant') {
+                url = '/voice_assistant';
+                formData.append('command', document.getElementById('voice-command').value);
+                responseContainerId = 'voice_assistant-response';
+            }else if (controlType === 'smartlock') {
+                url = '/smartlock';
+                formData.append('command', document.getElementById('smartlock-command').value);
+                responseContainerId = 'smartlock-response';
+            }
+
+            fetch(url, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(responseContainerId).innerText = data.response;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
+
